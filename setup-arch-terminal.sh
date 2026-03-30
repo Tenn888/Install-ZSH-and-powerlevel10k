@@ -61,7 +61,6 @@ echo "==> Настраиваем modern CLI"
 
 cat << 'EOF' >> ~/.zshrc
 
-# modern replacements
 alias ls='lsd'
 alias ll='lsd -l'
 alias la='lsd -a'
@@ -72,10 +71,8 @@ alias cat='bat'
 alias find='fd'
 alias grep='rg'
 
-# zoxide
 eval "$(zoxide init zsh)"
 
-# fzf keybindings
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
@@ -86,6 +83,14 @@ EOF
 # -------------------------------
 echo "==> Меняем shell на Zsh"
 chsh -s /bin/zsh || true
+
+# -------------------------------
+# Powerlevel10k configure (first run)
+# -------------------------------
+echo "==> Запуск настройки Powerlevel10k"
+if command -v zsh >/dev/null; then
+  zsh -i -c "p10k configure" || true
+fi
 
 echo "==> Готово!"
 
